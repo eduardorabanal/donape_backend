@@ -1,18 +1,22 @@
 {
-   "name": "donape_backend",
-   "version": "0.0.1",
-   "description": "Awesome project developed with TypeORM.",
-   "devDependencies": {
-      "ts-node": "7.0.1",
-      "@types/node": "^10.9.4",
-      "typescript": "3.0.3"
-   },
-   "dependencies": {
-      "typeorm": "0.2.7",
-      "reflect-metadata": "^0.1.12",
-      "mssql": "^4.1.0"
-   },
-   "scripts": {
-      "start": "ts-node src/index.ts"
-   }
+    "name": "donape_backend",
+    "version": "0.0.1",
+    "description": "Awesome project developed with TypeORM.",
+    "devDependencies": {
+        "@types/node": "^10.9.4",
+        "nodemon": "^1.18.4",
+        "ts-node": "7.0.1",
+        "tslint": "^5.11.0",
+        "tslint-config-prettier": "^1.15.0",
+        "typescript": "3.0.3"
+    },
+    "dependencies": {
+        "graphql-yoga": "^1.16.2",
+        "mssql": "^4.1.0",
+        "reflect-metadata": "^0.1.12",
+        "typeorm": "0.2.7"
+    },
+    "scripts": {
+        "start": "nodemon --exec ts-node src/index.ts"
+    }
 }
