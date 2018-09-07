@@ -1,23 +1,17 @@
 {
-   "type": "mssql",
-   "host": "localhost",
-   "username": "sa",
-   "password": "Admin12345",
-   "database": "tempdb",
-   "synchronize": true,
-   "logging": false,
-   "entities": [
-      "src/entity/**/*.ts"
-   ],
-   "migrations": [
-      "src/migration/**/*.ts"
-   ],
-   "subscribers": [
-      "src/subscriber/**/*.ts"
-   ],
-   "cli": {
-      "entitiesDir": "src/entity",
-      "migrationsDir": "src/migration",
-      "subscribersDir": "src/subscriber"
-   }
+    "type": "mssql",
+    "host": "localhost",
+    "username": "donar",
+    "password": "d0n4r",
+    "database": "donape",
+    "synchronize": false,
+    "logging": false,
+    "entities": ["src/entity/**/*.ts"],
+    "migrations": ["src/migration/**/*.ts"],
+    "subscribers": ["src/subscriber/**/*.ts"],
+    "cli": {
+        "entitiesDir": "src/entity",
+        "migrationsDir": "src/migration",
+        "subscribersDir": "src/subscriber"
+    }
 }
