@@ -1,11 +1,11 @@
-import { ResolverMap } from "./types/graphql-utils";
-import { GQL } from "./types/schema";
 import * as bcrypt from "bcryptjs";
-import { Usuario } from "./entity/Usuario";
+import { ResolverMap } from "../../types/graphql-utils";
+import { Usuario } from "../../entity/Usuario";
+import { GQL } from "../../types/schema";
 
 export const resolvers: ResolverMap = {
   Query: {
-    hello: (_, { name }: GQL.IHelloOnQueryArguments) => `Bye ${name || "World"}`
+    bye: () => "bye"
   },
   Mutation: {
     registrarse: async (
