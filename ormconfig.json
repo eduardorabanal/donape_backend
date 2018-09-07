@@ -1,17 +1,38 @@
-{
-    "type": "mssql",
-    "host": "localhost",
-    "username": "donar",
-    "password": "d0n4r",
-    "database": "donape",
-    "synchronize": false,
-    "logging": false,
-    "entities": ["src/entity/**/*.ts"],
-    "migrations": ["src/migration/**/*.ts"],
-    "subscribers": ["src/subscriber/**/*.ts"],
-    "cli": {
-        "entitiesDir": "src/entity",
-        "migrationsDir": "src/migration",
-        "subscribersDir": "src/subscriber"
+[{
+        "name": "development",
+        "type": "mssql",
+        "host": "localhost",
+        "username": "donar",
+        "password": "d0n4r",
+        "database": "donape-dev",
+        "synchronize": true,
+        "logging": false,
+        "entities": ["src/entity/**/*.ts"],
+        "migrations": ["src/migration/**/*.ts"],
+        "subscribers": ["src/subscriber/**/*.ts"],
+        "cli": {
+            "entitiesDir": "src/entity",
+            "migrationsDir": "src/migration",
+            "subscribersDir": "src/subscriber"
+        }
+    },
+    {
+        "name": "test",
+        "type": "mssql",
+        "host": "localhost",
+        "username": "donar",
+        "password": "d0n4r",
+        "database": "donape-test",
+        "dropSchema": true,
+        "synchronize": true,
+        "logging": false,
+        "entities": ["src/entity/**/*.ts"],
+        "migrations": ["src/migration/**/*.ts"],
+        "subscribers": ["src/subscriber/**/*.ts"],
+        "cli": {
+            "entitiesDir": "src/entity",
+            "migrationsDir": "src/migration",
+            "subscribersDir": "src/subscriber"
+        }
     }
-}
+]
