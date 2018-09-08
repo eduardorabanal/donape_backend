@@ -1,5 +1,4 @@
 import { request } from "graphql-request";
-import { startServer } from "../../startServer";
 import { Usuario } from "../../entity/Usuario";
 import {
   emailDuplicated,
@@ -11,14 +10,7 @@ import {
   apMaternoTooShort,
   celularInvalid
 } from "./errorMessages";
-
-let getHost = () => "";
-
-beforeAll(async function() {
-  const app = await startServer();
-  const { port } = app.address();
-  getHost = () => `http://127.0.0.1:${port}`;
-});
+import { createTypeormConn } from "../../utils/createTypeormConn";
 
 const email = "el@mimo.com";
 const password = "elmimo";
@@ -42,10 +34,15 @@ mutation{
     }
 }`;
 
+beforeAll(async function() {
+  await createTypeormConn();
+});
+
 describe("Registro de usuarios", function() {
   it("registra correctamente y valida email único", async function() {
     // registro correcto
-    const response = await request(getHost(), mutation());
+    console.log("hosTito", process.env.TEST_HOST);
+    const response = await request(process.env.TEST_HOST as string, mutation());
     expect(response).toEqual({ registrarse: null });
     const usuarios = await Usuario.find({ where: { email } });
     expect(usuarios).toHaveLength(1);
@@ -54,7 +51,10 @@ describe("Registro de usuarios", function() {
     expect(usuario.password).not.toEqual(password);
 
     // usuario que ya existe
-    const response2: any = await request(getHost(), mutation());
+    const response2: any = await request(
+      process.env.TEST_HOST as string,
+      mutation()
+    );
     expect(response2.registrarse).toHaveLength(1);
     expect(response2.registrarse[0]).toEqual({
       path: "email",
@@ -63,7 +63,10 @@ describe("Registro de usuarios", function() {
   });
 
   it("valida email muy corto", async function() {
-    const response: any = await request(getHost(), mutation({ email: "mi" }));
+    const response: any = await request(
+      process.env.TEST_HOST as string,
+      mutation({ email: "mi" })
+    );
     expect(response).toEqual({
       registrarse: [
         {
@@ -80,7 +83,7 @@ describe("Registro de usuarios", function() {
 
   it("valida password muy corta", async function() {
     const response: any = await request(
-      getHost(),
+      process.env.TEST_HOST as string,
       mutation({ password: "el" })
     );
     expect(response).toEqual({
@@ -94,7 +97,10 @@ describe("Registro de usuarios", function() {
   });
 
   it("valida nombre muy corto", async function() {
-    const response: any = await request(getHost(), mutation({ nombre: "mi" }));
+    const response: any = await request(
+      process.env.TEST_HOST as string,
+      mutation({ nombre: "mi" })
+    );
     expect(response).toEqual({
       registrarse: [
         {
@@ -107,7 +113,7 @@ describe("Registro de usuarios", function() {
 
   it("valida apPaterno muy corto", async function() {
     const response: any = await request(
-      getHost(),
+      process.env.TEST_HOST as string,
       mutation({ apPaterno: "mi" })
     );
     expect(response).toEqual({
@@ -122,7 +128,7 @@ describe("Registro de usuarios", function() {
 
   it("valida apMaterno muy corto", async function() {
     const response: any = await request(
-      getHost(),
+      process.env.TEST_HOST as string,
       mutation({ apMaterno: "mi" })
     );
     expect(response).toEqual({
@@ -137,7 +143,7 @@ describe("Registro de usuarios", function() {
 
   it("valida celular inválido (con letras)", async function() {
     const response: any = await request(
-      getHost(),
+      process.env.TEST_HOST as string,
       mutation({ celular: "97a321456" })
     );
     expect(response).toEqual({
@@ -152,7 +158,7 @@ describe("Registro de usuarios", function() {
 
   it("valida celular inválido (no empieza con 9)", async function() {
     const response: any = await request(
-      getHost(),
+      process.env.TEST_HOST as string,
       mutation({ celular: "474321456" })
     );
     expect(response).toEqual({

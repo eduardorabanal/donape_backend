@@ -4,6 +4,7 @@ import { ResolverMap } from "../../types/graphql-utils";
 import { Usuario } from "../../entity/Usuario";
 import { GQL } from "../../types/schema";
 import { formatYupError } from "../../utils/formatYupError";
+import { createConfirmEmailLink } from "../../utils/createConfirmEmailLink";
 import {
   emailDuplicated,
   emailTooShort,
@@ -49,7 +50,11 @@ export const resolvers: ResolverMap = {
     bye: () => "bye"
   },
   Mutation: {
-    registrarse: async (_, args: GQL.IRegistrarseOnMutationArguments) => {
+    registrarse: async (
+      _,
+      args: GQL.IRegistrarseOnMutationArguments,
+      { redis, url }
+    ) => {
       try {
         await esquema.validate(args, { abortEarly: false });
       } catch (err) {
@@ -82,6 +87,9 @@ export const resolvers: ResolverMap = {
         celular
       });
       await usuario.save();
+
+      await createConfirmEmailLink(url, usuario.id, redis);
+
       return null;
     }
   }
