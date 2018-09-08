@@ -19,6 +19,20 @@ export const resolvers: ResolverMap = {
         celular
       }: GQL.IRegistrarseOnMutationArguments
     ) => {
+      const usuarioYaExiste = await Usuario.findOne({
+        where: { email },
+        select: ["id"]
+      });
+
+      if (usuarioYaExiste) {
+        return [
+          {
+            path: "email",
+            message: "ya ha sido tomado"
+          }
+        ];
+      }
+
       const hashedPassword = await bcrypt.hash(password, 10);
       const usuario = Usuario.create({
         email,
@@ -29,7 +43,7 @@ export const resolvers: ResolverMap = {
         celular
       });
       await usuario.save();
-      return true;
+      return null;
     }
   }
 };

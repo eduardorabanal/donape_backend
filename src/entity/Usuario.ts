@@ -12,7 +12,7 @@ export class Usuario extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column("varchar", { length: 255 })
+  @Column("varchar", { length: 255, unique: true })
   email: string;
 
   @Column("char", { length: 60 })

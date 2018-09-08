@@ -1,3 +1,5 @@
+#import Error from "../../shared.graphql"
+
 type Query {
   bye: String
 }
@@ -10,5 +12,5 @@ type Mutation {
     apPaterno: String!
     apMaterno: String!
     celular: String!
-  ): Boolean
+  ): [Error!]
 }
