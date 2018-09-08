@@ -23,6 +23,7 @@ export namespace GQL {
   interface IQuery {
     __typename: "Query";
     hello: string;
+    bye: string | null;
   }
 
   interface IHelloOnQueryArguments {
@@ -31,7 +32,7 @@ export namespace GQL {
 
   interface IMutation {
     __typename: "Mutation";
-    registrarse: boolean | null;
+    registrarse: Array<IError>;
   }
 
   interface IRegistrarseOnMutationArguments {
@@ -41,6 +42,12 @@ export namespace GQL {
     apPaterno: string;
     apMaterno: string;
     celular: string;
+  }
+
+  interface IError {
+    __typename: "Error";
+    path: string;
+    message: string;
   }
 }
 

@@ -3,11 +3,15 @@ import { createTypeormConn } from "./createTypeormConn";
 import { Usuario } from "../entity/Usuario";
 import * as Redis from "ioredis";
 import fetch from "node-fetch";
+import { Connection } from "typeorm";
 
 let usuarioId: string;
+const redis = new Redis();
+
+let conn: Connection;
 
 beforeAll(async () => {
-  await createTypeormConn();
+  conn = await createTypeormConn();
   const usuario = await Usuario.create({
     email: "el@mimix.com",
     password: "elmimoso",
@@ -19,10 +23,14 @@ beforeAll(async () => {
   usuarioId = usuario.id;
 });
 
+afterAll(async () => {
+  if (conn) {
+    conn.close();
+  }
+});
+
 describe("Enlace de confirmación de email", function() {
   it("confirma usuario y borra su entrada en redis", async function() {
-    const redis = new Redis();
-
     const url = await createConfirmEmailLink(
       process.env.TEST_HOST as string,
       usuarioId,
@@ -39,11 +47,5 @@ describe("Enlace de confirmación de email", function() {
     const value = await redis.get(key);
 
     expect(value).toBeNull();
-  });
-
-  it("muestra error si recibe key inválido", async function() {
-    const response = await fetch(`${process.env.TEST_HOST}/confirmar/1234`);
-    const text = await response.text();
-    expect(text).toEqual("enlace inválido");
   });
 });
