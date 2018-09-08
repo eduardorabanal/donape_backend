@@ -34,6 +34,7 @@ export const startServer = async () => {
     const usuarioId = await redis.get(id);
     if (usuarioId) {
       await Usuario.update({ id: usuarioId }, { confirmado: true });
+      await redis.del(id);
       res.send("ok");
     } else {
       res.send("enlace inválido");
