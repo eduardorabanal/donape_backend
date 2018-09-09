@@ -46,8 +46,6 @@ export namespace GQL {
     email: string;
     password: string;
     nombre: string;
-    apPaterno: string;
-    apMaterno: string;
     celular: string;
   }
 

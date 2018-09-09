@@ -12,9 +12,7 @@ import {
   emailInvalid,
   passwordTooShort,
   nombreTooShort,
-  celularInvalid,
-  apPaternoTooShort,
-  apMaternoTooShort
+  celularInvalid
 } from "./errorMessages";
 
 const esquema = yup.object().shape({
@@ -30,14 +28,6 @@ const esquema = yup.object().shape({
   nombre: yup
     .string()
     .min(3, nombreTooShort)
-    .max(255),
-  apPaterno: yup
-    .string()
-    .min(3, apPaternoTooShort)
-    .max(255),
-  apMaterno: yup
-    .string()
-    .min(3, apMaternoTooShort)
     .max(255),
   celular: yup
     .string()
@@ -62,7 +52,7 @@ export const resolvers: ResolverMap = {
         return formatYupError(err);
       }
 
-      const { email, password, nombre, apPaterno, apMaterno, celular } = args;
+      const { email, password, nombre, celular } = args;
 
       const usuarioYaExiste = await Usuario.findOne({
         where: { email },
@@ -83,8 +73,6 @@ export const resolvers: ResolverMap = {
         email,
         password: hashedPassword,
         nombre,
-        apPaterno,
-        apMaterno,
         celular
       });
       await usuario.save();

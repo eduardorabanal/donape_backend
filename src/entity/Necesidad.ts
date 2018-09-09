@@ -1,5 +1,5 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
-import { GrupoNecesidad } from "./GrupoNecesidad";
+import { Publicacion } from "./Publicacion";
 
 @Entity("Necesidades")
 export class Necesidad {
@@ -15,6 +15,6 @@ export class Necesidad {
   @Column()
   fecha: Date;
 
-  @ManyToOne(() => GrupoNecesidad, grupoId => grupoId.necesidades)
-  grupo: GrupoNecesidad;
+  @ManyToOne(() => Publicacion, publicacion => publicacion.necesidades)
+  publicacion: Publicacion;
 }

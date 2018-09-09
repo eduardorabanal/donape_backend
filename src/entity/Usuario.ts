@@ -5,7 +5,7 @@ import {
   OneToMany,
   BaseEntity
 } from "typeorm";
-import { GrupoNecesidad } from "./GrupoNecesidad";
+import { Publicacion } from "./Publicacion";
 
 @Entity("Usuarios")
 export class Usuario extends BaseEntity {
@@ -21,18 +21,12 @@ export class Usuario extends BaseEntity {
   @Column("varchar", { length: 255 })
   nombre: string;
 
-  @Column("varchar", { length: 255 })
-  apPaterno: string;
-
-  @Column("varchar", { length: 255 })
-  apMaterno: string;
-
   @Column("char", { length: 9 })
   celular: string;
 
   @Column({ default: false })
   confirmado: boolean;
 
-  @OneToMany(() => GrupoNecesidad, grupoNecesidad => grupoNecesidad.usuarioId)
-  gruposNecesidades: GrupoNecesidad[];
+  @OneToMany(() => Publicacion, publicacion => publicacion.usuarioId)
+  publicaciones: Publicacion[];
 }

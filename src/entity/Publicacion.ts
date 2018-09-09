@@ -8,8 +8,8 @@ import {
 import { Necesidad } from "./Necesidad";
 import { Usuario } from "./Usuario";
 
-@Entity("GruposNecesidades")
-export class GrupoNecesidad {
+@Entity("Publicaciones")
+export class Publicacion {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -25,9 +25,9 @@ export class GrupoNecesidad {
   @Column()
   fecha: Date;
 
-  @OneToMany(() => Necesidad, necesidad => necesidad.grupo)
+  @OneToMany(() => Necesidad, necesidad => necesidad.publicacion)
   necesidades: Necesidad[];
 
-  @ManyToOne(() => Usuario, usuario => usuario.gruposNecesidades)
+  @ManyToOne(() => Usuario, usuario => usuario.publicaciones)
   usuario: Usuario;
 }

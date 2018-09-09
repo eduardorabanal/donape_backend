@@ -16,8 +16,6 @@ beforeAll(async () => {
     email: "el@mimix.com",
     password: "elmimoso",
     nombre: "Mimo",
-    apPaterno: "Carbajo",
-    apMaterno: "García",
     celular: "959357456"
   }).save();
   usuarioId = usuario.id;

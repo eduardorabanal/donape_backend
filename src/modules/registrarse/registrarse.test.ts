@@ -6,8 +6,6 @@ import {
   emailInvalid,
   passwordTooShort,
   nombreTooShort,
-  apPaternoTooShort,
-  apMaternoTooShort,
   celularInvalid
 } from "./errorMessages";
 import { createTypeormConn } from "../../utils/createTypeormConn";
@@ -113,36 +111,6 @@ describe("Registro de usuarios", function() {
         {
           path: "nombre",
           message: nombreTooShort
-        }
-      ]
-    });
-  });
-
-  it("valida apPaterno muy corto", async function() {
-    const response: any = await request(
-      process.env.TEST_HOST as string,
-      mutation({ apPaterno: "mi" })
-    );
-    expect(response).toEqual({
-      registrarse: [
-        {
-          path: "apPaterno",
-          message: apPaternoTooShort
-        }
-      ]
-    });
-  });
-
-  it("valida apMaterno muy corto", async function() {
-    const response: any = await request(
-      process.env.TEST_HOST as string,
-      mutation({ apMaterno: "mi" })
-    );
-    expect(response).toEqual({
-      registrarse: [
-        {
-          path: "apMaterno",
-          message: apMaternoTooShort
         }
       ]
     });
