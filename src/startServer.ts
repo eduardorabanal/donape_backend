@@ -18,7 +18,8 @@ export const startServer = async () => {
   await createTypeormConn();
   const PORT = process.env.NODE_ENV === "test" ? 0 : 4000;
   const app = await server.start({
-    port: PORT
+    port: PORT,
+    endpoint: "/graphql"
   });
   console.log("Server is running on localhost:" + PORT);
   return app;
