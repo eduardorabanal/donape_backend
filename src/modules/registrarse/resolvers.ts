@@ -4,8 +4,8 @@ import { ResolverMap } from "../../types/graphql-utils";
 import { Usuario } from "../../entity/Usuario";
 import { GQL } from "../../types/schema";
 import { formatYupError } from "../../utils/formatYupError";
-import { createConfirmEmailLink } from "../../utils/createConfirmEmailLink";
-import { sendEmail } from "../../utils/sendEmail";
+// import { createConfirmEmailLink } from "../../utils/createConfirmEmailLink";
+// import { sendEmail } from "../../utils/sendEmail";
 import {
   emailDuplicated,
   emailTooShort,
@@ -53,8 +53,8 @@ export const resolvers: ResolverMap = {
   Mutation: {
     registrarse: async (
       _,
-      args: GQL.IRegistrarseOnMutationArguments,
-      { redis, url }
+      args: GQL.IRegistrarseOnMutationArguments
+      // { redis, url }
     ) => {
       try {
         await esquema.validate(args, { abortEarly: false });
@@ -89,12 +89,12 @@ export const resolvers: ResolverMap = {
       });
       await usuario.save();
 
-      if (process.env.NODE_ENV !== "test") {
-        await sendEmail(
-          email,
-          await createConfirmEmailLink(url, usuario.id, redis)
-        );
-      }
+      // if (process.env.NODE_ENV !== "test") {
+      //   await sendEmail(
+      //     email,
+      //     await createConfirmEmailLink(url, usuario.id, redis)
+      //   );
+      // }
 
       return null;
     }
