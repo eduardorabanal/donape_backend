@@ -2,3 +2,8 @@ type Error {
   path: String!
   message: String!
 }
+type UserResponse {
+  success: Boolean!
+  token: String
+  errors: [Error!]
+}

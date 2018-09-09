@@ -1,12 +1,17 @@
-import * as bcrypt from "bcryptjs";
+import * as bcrypt from "bcrypt";
 import { ResolverMap } from "../../types/graphql-utils";
 import { Usuario } from "../../entity/Usuario";
 import { GQL } from "../../types/schema";
-import { invalidLogin, emailNotConfirmed } from "./errorMessages";
+import { invalidLogin } from "./errorMessages";
 
 const errorResponse = {
-  path: "email",
-  message: invalidLogin
+  success: false,
+  errors: [
+    {
+      path: "email",
+      message: invalidLogin
+    }
+  ]
 };
 
 export const resolvers: ResolverMap = {
@@ -17,25 +22,19 @@ export const resolvers: ResolverMap = {
     login: async (_, { email, password }: GQL.ILoginOnMutationArguments) => {
       const usuario = await Usuario.findOne({ where: { email } });
       if (!usuario) {
-        return [errorResponse];
-      }
-
-      if (!usuario.confirmado) {
-        return [
-          {
-            path: "email",
-            message: emailNotConfirmed
-          }
-        ];
+        return errorResponse;
       }
 
       const validPassword = await bcrypt.compare(password, usuario.password);
 
       if (!validPassword) {
-        return [errorResponse];
+        return errorResponse;
       }
 
-      return null;
+      return {
+        success: true,
+        errors: null
+      };
     }
   }
 };

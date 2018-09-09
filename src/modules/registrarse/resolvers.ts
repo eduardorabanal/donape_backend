@@ -1,11 +1,9 @@
-import * as bcrypt from "bcryptjs";
+import * as bcrypt from "bcrypt";
 import * as yup from "yup";
 import { ResolverMap } from "../../types/graphql-utils";
 import { Usuario } from "../../entity/Usuario";
 import { GQL } from "../../types/schema";
 import { formatYupError } from "../../utils/formatYupError";
-// import { createConfirmEmailLink } from "../../utils/createConfirmEmailLink";
-// import { sendEmail } from "../../utils/sendEmail";
 import {
   emailDuplicated,
   emailTooShort,
@@ -49,7 +47,10 @@ export const resolvers: ResolverMap = {
       try {
         await esquema.validate(args, { abortEarly: false });
       } catch (err) {
-        return formatYupError(err);
+        return {
+          success: false,
+          errors: formatYupError(err)
+        };
       }
 
       const { email, password, nombre, celular } = args;
@@ -60,12 +61,15 @@ export const resolvers: ResolverMap = {
       });
 
       if (usuarioYaExiste) {
-        return [
-          {
-            path: "email",
-            message: emailDuplicated
-          }
-        ];
+        return {
+          success: false,
+          errors: [
+            {
+              path: "email",
+              message: emailDuplicated
+            }
+          ]
+        };
       }
 
       const hashedPassword = await bcrypt.hash(password, 10);
@@ -77,14 +81,10 @@ export const resolvers: ResolverMap = {
       });
       await usuario.save();
 
-      // if (process.env.NODE_ENV !== "test") {
-      //   await sendEmail(
-      //     email,
-      //     await createConfirmEmailLink(url, usuario.id, redis)
-      //   );
-      // }
-
-      return null;
+      return {
+        success: true,
+        errors: null
+      };
     }
   }
 };

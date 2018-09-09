@@ -1,9 +1,9 @@
-#import Error from "../../shared.graphql"
+#import UserResponse from "../../shared.graphql"
 
 type Query {
   bye2: String
 }
 
 type Mutation {
-  login(email: String!, password: String!): [Error!]
+  login(email: String!, password: String!): UserResponse!
 }

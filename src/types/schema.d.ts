@@ -33,8 +33,8 @@ export namespace GQL {
 
   interface IMutation {
     __typename: "Mutation";
-    login: Array<IError>;
-    registrarse: Array<IError>;
+    login: IUserResponse;
+    registrarse: IUserResponse;
   }
 
   interface ILoginOnMutationArguments {
@@ -47,6 +47,13 @@ export namespace GQL {
     password: string;
     nombre: string;
     celular: string;
+  }
+
+  interface IUserResponse {
+    __typename: "UserResponse";
+    success: boolean;
+    token: string | null;
+    errors: Array<IError>;
   }
 
   interface IError {

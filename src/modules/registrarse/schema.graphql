@@ -1,4 +1,4 @@
-#import Error from "../../shared.graphql"
+#import UserResponse from "../../shared.graphql"
 
 type Query {
   bye: String
@@ -10,5 +10,5 @@ type Mutation {
     password: String!
     nombre: String!
     celular: String!
-  ): [Error!]
+  ): UserResponse!
 }
