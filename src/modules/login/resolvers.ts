@@ -3,6 +3,7 @@ import { ResolverMap } from "../../types/graphql-utils";
 import { Usuario } from "../../entity/Usuario";
 import { GQL } from "../../types/schema";
 import { invalidLogin } from "./errorMessages";
+import { createJwtToken } from "../../utils/jwt";
 
 const errorResponse = {
   success: false,
@@ -33,7 +34,8 @@ export const resolvers: ResolverMap = {
 
       return {
         success: true,
-        errors: null
+        errors: null,
+        token: createJwtToken(usuario, process.env.SECRET as string)
       };
     }
   }
