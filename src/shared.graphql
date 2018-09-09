@@ -7,3 +7,10 @@ type UserResponse {
   token: String
   errors: [Error!]
 }
+type Publicacion {
+  id: ID!
+  usuarioId: ID!
+  titulo: String!
+  descripcion: String!
+  fecha: String!
+}

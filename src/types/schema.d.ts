@@ -24,11 +24,21 @@ export namespace GQL {
     __typename: "Query";
     bye2: string | null;
     hello: string;
+    listarPublicaciones: Array<IPublicacion>;
     bye: string | null;
   }
 
   interface IHelloOnQueryArguments {
     name?: string | null;
+  }
+
+  interface IPublicacion {
+    __typename: "Publicacion";
+    id: string;
+    usuarioId: string;
+    titulo: string;
+    descripcion: string;
+    fecha: string;
   }
 
   interface IMutation {

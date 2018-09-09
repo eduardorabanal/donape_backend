@@ -3,15 +3,16 @@ import {
   PrimaryGeneratedColumn,
   Column,
   OneToMany,
-  ManyToOne
+  ManyToOne,
+  BaseEntity
 } from "typeorm";
 import { Necesidad } from "./Necesidad";
 import { Usuario } from "./Usuario";
 
 @Entity("Publicaciones")
-export class Publicacion {
-  @PrimaryGeneratedColumn()
-  id: number;
+export class Publicacion extends BaseEntity {
+  @PrimaryGeneratedColumn("uuid")
+  id: string;
 
   @Column()
   usuarioId: number;

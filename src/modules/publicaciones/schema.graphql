@@ -1,0 +1,4 @@
+#import Publicacion from "../../shared.graphql"
+type Query {
+  listarPublicaciones: [Publicacion]!
+}
