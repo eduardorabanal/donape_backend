@@ -11,6 +11,7 @@ import {
   celularInvalid
 } from "./errorMessages";
 import { createTypeormConn } from "../../utils/createTypeormConn";
+import { Connection } from "typeorm";
 
 const email = "el@mimo.com";
 const password = "elmimo";
@@ -34,8 +35,14 @@ mutation{
     }
 }`;
 
+let conn: Connection;
 beforeAll(async function() {
-  await createTypeormConn();
+  conn = await createTypeormConn();
+});
+afterAll(async function() {
+  if (conn) {
+    conn.close();
+  }
 });
 
 describe("Registro de usuarios", function() {
