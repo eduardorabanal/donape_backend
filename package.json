@@ -9,6 +9,7 @@
         "@types/jest": "^23.3.1",
         "@types/node": "^10.9.4",
         "@types/node-fetch": "^2.1.2",
+        "@types/sparkpost": "^2.1.4",
         "@types/uuid": "^3.4.3",
         "@types/yup": "^0.24.9",
         "babel-jest": "^23.4.2",
@@ -25,6 +26,7 @@
     "dependencies": {
         "@gql2ts/from-schema": "^1.8.2",
         "bcryptjs": "^2.4.3",
+        "dotenv": "^6.0.0",
         "express": "^4.16.3",
         "graphql": "^0.13.2",
         "graphql-import": "^0.5.0",
@@ -35,6 +37,7 @@
         "mssql": "^4.1.0",
         "node-fetch": "^2.2.0",
         "reflect-metadata": "^0.1.12",
+        "sparkpost": "^2.1.2",
         "typeorm": "^0.2.7",
         "uuid": "^3.2.1",
         "yup": "^0.26.3"
