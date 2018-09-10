@@ -9,8 +9,8 @@ import { Publicacion } from "./Publicacion";
 
 @Entity("Usuarios")
 export class Usuario extends BaseEntity {
-  @PrimaryGeneratedColumn("uuid")
-  id: string;
+  @PrimaryGeneratedColumn()
+  id: number;
 
   @Column("varchar", { length: 255, unique: true })
   email: string;
@@ -23,9 +23,6 @@ export class Usuario extends BaseEntity {
 
   @Column("char", { length: 9 })
   celular: string;
-
-  @Column({ default: false })
-  confirmado: boolean;
 
   @OneToMany(() => Publicacion, publicacion => publicacion.usuarioId)
   publicaciones: Publicacion[];

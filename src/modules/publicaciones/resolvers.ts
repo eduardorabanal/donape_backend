@@ -5,7 +5,9 @@ import { Publicacion } from "../../entity/Publicacion";
 export const resolvers: ResolverMap = {
   Query: {
     listarPublicaciones: async () => {
-      return await Publicacion.find();
+      return await Publicacion.find({
+        relations: ["necesidades", "imagenes"]
+      });
     }
   }
 };

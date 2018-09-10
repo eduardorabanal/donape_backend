@@ -3,7 +3,7 @@
 
 export namespace GQL {
   interface IGraphQLResponseRoot {
-    data?: IQuery | IMutation;
+    data?: IQuery;
     errors?: Array<IGraphQLResponseError>;
   }
 
@@ -22,54 +22,33 @@ export namespace GQL {
 
   interface IQuery {
     __typename: "Query";
-    bye2: string | null;
-    hello: string;
     listarPublicaciones: Array<IPublicacion>;
-    bye: string | null;
-  }
-
-  interface IHelloOnQueryArguments {
-    name?: string | null;
   }
 
   interface IPublicacion {
     __typename: "Publicacion";
-    id: string;
+    id: number;
     usuarioId: string;
     titulo: string;
     descripcion: string;
     fecha: string;
+    necesidades: Array<INecesidad> | null;
+    imagenes: Array<IImagen> | null;
   }
 
-  interface IMutation {
-    __typename: "Mutation";
-    login: IUserResponse;
-    registrarse: IUserResponse;
+  interface INecesidad {
+    __typename: "Necesidad";
+    id: number;
+    articulo: string;
+    cantidad: number;
+    fecha: string;
+    publicacion: IPublicacion | null;
   }
 
-  interface ILoginOnMutationArguments {
-    email: string;
-    password: string;
-  }
-
-  interface IRegistrarseOnMutationArguments {
-    email: string;
-    password: string;
-    nombre: string;
-    celular: string;
-  }
-
-  interface IUserResponse {
-    __typename: "UserResponse";
-    success: boolean;
-    token: string | null;
-    errors: Array<IError>;
-  }
-
-  interface IError {
-    __typename: "Error";
-    path: string;
-    message: string;
+  interface IImagen {
+    __typename: "Imagen";
+    id: number;
+    url: string;
   }
 }
 

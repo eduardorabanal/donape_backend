@@ -1,4 +1,4 @@
-#import Publicacion from "../../shared.graphql"
+#import Publicacion from "../../models.graphql"
 type Query {
   listarPublicaciones: [Publicacion]!
 }

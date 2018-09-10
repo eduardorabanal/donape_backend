@@ -1,0 +1,22 @@
+type Publicacion {
+  id: Int!
+  usuarioId: ID!
+  titulo: String!
+  descripcion: String!
+  fecha: String!
+  necesidades: [Necesidad]
+  imagenes: [Imagen]
+}
+
+type Necesidad {
+  id: Int!
+  articulo: String!
+  cantidad: Float!
+  fecha: String!
+  publicacion: Publicacion
+}
+
+type Imagen {
+  id: Int!
+  url: String!
+}
