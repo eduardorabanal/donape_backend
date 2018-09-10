@@ -18,7 +18,7 @@ export const login = async (req: Request, res: Response) => {
     return res.status(500).json(invalidLoginResponse);
   }
 
-  return res.status(500).json({
+  return res.json({
     success: true,
     errors: null,
     token: createJwtToken(usuario, process.env.SECRET as string)
