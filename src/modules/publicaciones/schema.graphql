@@ -1,4 +1,5 @@
 #import Publicacion from "../../models.graphql"
 type Query {
-  listarPublicaciones: [Publicacion]!
+  publicaciones: [Publicacion]!
+  publicacion(id: Int!): Publicacion
 }

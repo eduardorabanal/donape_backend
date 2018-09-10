@@ -1,0 +1,14 @@
+#import Donacion from "../../models.graphql"
+type Query {
+  donacionesByNecesidad(necesidadId: Int!): [Donacion]!
+  donacion(id: Int!): Donacion
+}
+
+type Mutation {
+  crearDonacion(
+    necesidad: Int!
+    usuario: Int!
+    fecha: String!
+    cantidad: Float!
+  ): Donacion
+}

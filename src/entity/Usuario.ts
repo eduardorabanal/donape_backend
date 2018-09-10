@@ -6,6 +6,7 @@ import {
   BaseEntity
 } from "typeorm";
 import { Publicacion } from "./Publicacion";
+import { Donacion } from "./Donacion";
 
 @Entity("Usuarios")
 export class Usuario extends BaseEntity {
@@ -26,4 +27,7 @@ export class Usuario extends BaseEntity {
 
   @OneToMany(() => Publicacion, publicacion => publicacion.usuarioId)
   publicaciones: Publicacion[];
+
+  @OneToMany(() => Donacion, donacion => donacion.usuario)
+  donaciones: Donacion[];
 }

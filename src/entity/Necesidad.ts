@@ -3,9 +3,11 @@ import {
   PrimaryGeneratedColumn,
   Column,
   ManyToOne,
-  BaseEntity
+  BaseEntity,
+  OneToMany
 } from "typeorm";
 import { Publicacion } from "./Publicacion";
+import { Donacion } from "./Donacion";
 
 @Entity("Necesidades")
 export class Necesidad extends BaseEntity {
@@ -23,4 +25,7 @@ export class Necesidad extends BaseEntity {
 
   @ManyToOne(() => Publicacion, publicacion => publicacion.necesidades)
   publicacion: Publicacion;
+
+  @OneToMany(() => Donacion, donacion => donacion.necesidad)
+  donaciones: Donacion[];
 }

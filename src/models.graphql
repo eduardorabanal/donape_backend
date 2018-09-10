@@ -1,6 +1,5 @@
 type Publicacion {
   id: Int!
-  usuarioId: ID!
   titulo: String!
   descripcion: String!
   fecha: String!
@@ -14,6 +13,13 @@ type Necesidad {
   cantidad: Float!
   fecha: String!
   publicacion: Publicacion
+}
+
+type Donacion {
+  id: Int!
+  necesidad: Necesidad
+  fecha: String!
+  cantidad: Float!
 }
 
 type Imagen {

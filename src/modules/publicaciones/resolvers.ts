@@ -1,13 +1,14 @@
 import { ResolverMap } from "../../types/graphql-utils";
-import { Publicacion } from "../../entity/Publicacion";
-// import { GQL } from "../../types/schema";
+import { GQL } from "../../types/schema";
+import { PublicacionRepo } from "./repo";
 
 export const resolvers: ResolverMap = {
   Query: {
-    listarPublicaciones: async () => {
-      return await Publicacion.find({
-        relations: ["necesidades", "imagenes"]
-      });
+    publicaciones: async () => {
+      return await PublicacionRepo.findAll();
+    },
+    publicacion: async (_, { id }: GQL.IPublicacionOnQueryArguments) => {
+      return await PublicacionRepo.findById(id);
     }
   }
 };

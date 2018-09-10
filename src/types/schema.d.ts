@@ -3,7 +3,7 @@
 
 export namespace GQL {
   interface IGraphQLResponseRoot {
-    data?: IQuery;
+    data?: IQuery | IMutation;
     errors?: Array<IGraphQLResponseError>;
   }
 
@@ -22,18 +22,30 @@ export namespace GQL {
 
   interface IQuery {
     __typename: "Query";
-    listarPublicaciones: Array<IPublicacion>;
+    donacionesByNecesidad: Array<IDonacion>;
+    donacion: IDonacion | null;
+    publicaciones: Array<IPublicacion>;
+    publicacion: IPublicacion | null;
   }
 
-  interface IPublicacion {
-    __typename: "Publicacion";
+  interface IDonacionesByNecesidadOnQueryArguments {
+    necesidadId: number;
+  }
+
+  interface IDonacionOnQueryArguments {
     id: number;
-    usuarioId: string;
-    titulo: string;
-    descripcion: string;
+  }
+
+  interface IPublicacionOnQueryArguments {
+    id: number;
+  }
+
+  interface IDonacion {
+    __typename: "Donacion";
+    id: number;
+    necesidad: INecesidad | null;
     fecha: string;
-    necesidades: Array<INecesidad> | null;
-    imagenes: Array<IImagen> | null;
+    cantidad: number;
   }
 
   interface INecesidad {
@@ -45,10 +57,32 @@ export namespace GQL {
     publicacion: IPublicacion | null;
   }
 
+  interface IPublicacion {
+    __typename: "Publicacion";
+    id: number;
+    titulo: string;
+    descripcion: string;
+    fecha: string;
+    necesidades: Array<INecesidad> | null;
+    imagenes: Array<IImagen> | null;
+  }
+
   interface IImagen {
     __typename: "Imagen";
     id: number;
     url: string;
+  }
+
+  interface IMutation {
+    __typename: "Mutation";
+    crearDonacion: IDonacion | null;
+  }
+
+  interface ICrearDonacionOnMutationArguments {
+    necesidad: number;
+    usuario: number;
+    fecha: string;
+    cantidad: number;
   }
 }
 
