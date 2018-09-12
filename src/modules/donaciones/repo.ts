@@ -1,6 +1,6 @@
 import { Donacion } from "../../entity/Donacion";
 
-const relations = ["necesidad", "usuario"];
+const relations = ["necesidad", "usuario", "estados"];
 
 export class DonacionRepo {
   static findByNecesidad(necesidadId: number) {
@@ -9,10 +9,16 @@ export class DonacionRepo {
       relations
     });
   }
+  static findByUsuario(usuarioId: number) {
+    return Donacion.find({
+      where: { usuario: usuarioId },
+      relations
+    });
+  }
   static findById(id: number) {
     return Donacion.findOne({
       where: { id },
-      relations
+      relations: ["estados"]
     });
   }
   static async create(args: any) {

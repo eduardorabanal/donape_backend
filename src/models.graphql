@@ -20,6 +20,15 @@ type Donacion {
   necesidad: Necesidad
   fecha: String!
   cantidad: Float!
+  estados: [DonacionEstado]
+}
+
+type DonacionEstado {
+  id: String
+  donacion: Donacion
+  nombre: String
+  fecha: String
+  imagenes: [Imagen]
 }
 
 type Imagen {
