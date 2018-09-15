@@ -3,6 +3,7 @@ import { GQL } from "../../types/schema";
 import { DonacionRepo } from "./repo";
 import { EstadoDonacionRelacionRepo } from "./estados-repo";
 import { Donacion } from "../../entity/Donacion";
+import { checkAuth } from "../../auth/checkAuth";
 
 const rellenarDonacion = (donacion: Donacion | undefined) => {
   if (donacion) {
@@ -33,8 +34,10 @@ export const resolvers: ResolverMap = {
       );
     },
 
-    donacionesByUsuario: async (_, { usuarioId }) => {
-      const donaciones = await DonacionRepo.findByUsuario(usuarioId);
+    donacionesByUsuario: async (_, {}, { user }) => {
+      checkAuth(user);
+      console.log("payload", user);
+      const donaciones = await DonacionRepo.findByUsuario(user.id);
       return rellenarDonaciones(donaciones);
     },
 

@@ -1,7 +1,7 @@
 #import Donacion from "../../models.graphql"
 type Query {
   donacionesByNecesidad(necesidadId: Int!): [Donacion]!
-  donacionesByUsuario(usuarioId: Int!): [Donacion]!
+  donacionesByUsuario: [Donacion]!
   donacion(id: Int!): Donacion
 }
 
