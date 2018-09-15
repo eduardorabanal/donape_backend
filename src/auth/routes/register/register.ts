@@ -16,19 +16,23 @@ import { createJwtToken } from "../../../auth/jwt";
 const esquema = yup.object().shape({
   email: yup
     .string()
+    .required()
     .min(3, emailTooShort)
     .max(255)
     .email(emailInvalid),
   password: yup
     .string()
+    .required()
     .min(6, passwordTooShort)
     .max(255),
   nombre: yup
     .string()
+    .required()
     .min(3, nombreTooShort)
     .max(255),
   celular: yup
     .string()
+    .required()
     .min(9)
     .max(9)
     .matches(new RegExp("^9[0-9]{8}$"), celularInvalid)
