@@ -6,10 +6,5 @@ type Query {
 }
 
 type Mutation {
-  crearDonacion(
-    necesidad: Int!
-    usuario: Int!
-    fecha: String!
-    cantidad: Float!
-  ): Donacion
+  crearDonacion(necesidad: Int!, cantidad: Float!): Donacion
 }

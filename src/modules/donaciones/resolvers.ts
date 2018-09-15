@@ -36,7 +36,6 @@ export const resolvers: ResolverMap = {
 
     donacionesByUsuario: async (_, {}, { user }) => {
       checkAuth(user);
-      console.log("payload", user);
       const donaciones = await DonacionRepo.findByUsuario(user.id);
       return rellenarDonaciones(donaciones);
     },
@@ -47,8 +46,17 @@ export const resolvers: ResolverMap = {
     }
   },
   Mutation: {
-    crearDonacion: async (_, args: GQL.ICrearDonacionOnMutationArguments) => {
-      const donacion = await DonacionRepo.create(args);
+    crearDonacion: async (
+      _,
+      { necesidad, cantidad }: GQL.ICrearDonacionOnMutationArguments,
+      { user }
+    ) => {
+      checkAuth(user);
+      const donacion = await DonacionRepo.create({
+        necesidad,
+        cantidad,
+        usuario: user.id
+      });
       return rellenarDonacion(donacion);
     }
   }

@@ -4,7 +4,8 @@ import {
   Column,
   ManyToOne,
   BaseEntity,
-  OneToMany
+  OneToMany,
+  CreateDateColumn
 } from "typeorm";
 import { Necesidad } from "./Necesidad";
 import { Usuario } from "./Usuario";
@@ -15,7 +16,7 @@ export class Donacion extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @CreateDateColumn()
   fecha: Date;
 
   @Column()
