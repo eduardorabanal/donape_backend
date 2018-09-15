@@ -2,6 +2,25 @@ import { ResolverMap } from "../../types/graphql-utils";
 import { GQL } from "../../types/schema";
 import { DonacionRepo } from "./repo";
 import { EstadoDonacionRelacionRepo } from "./estados-repo";
+import { Donacion } from "../../entity/Donacion";
+
+const rellenarDonacion = (donacion: Donacion | undefined) => {
+  if (donacion) {
+    return {
+      ...donacion,
+      estados: EstadoDonacionRelacionRepo.findEstadosByDonacion(donacion.id)
+    };
+  }
+  return donacion;
+};
+
+const rellenarDonaciones = (donaciones: Donacion[]) => {
+  const result: any[] = [];
+  donaciones.forEach(donacion => {
+    result.push(rellenarDonacion(donacion));
+  });
+  return result;
+};
 
 export const resolvers: ResolverMap = {
   Query: {
@@ -9,28 +28,25 @@ export const resolvers: ResolverMap = {
       _,
       { necesidadId }: GQL.IDonacionesByNecesidadOnQueryArguments
     ) => {
-      return await DonacionRepo.findByNecesidad(necesidadId);
+      return rellenarDonaciones(
+        await DonacionRepo.findByNecesidad(necesidadId)
+      );
     },
 
     donacionesByUsuario: async (_, { usuarioId }) => {
       const donaciones = await DonacionRepo.findByUsuario(usuarioId);
-      const result: any[] = [];
-      donaciones.forEach(donacion => {
-        result.push({
-          ...donacion,
-          estados: EstadoDonacionRelacionRepo.findEstadosByDonacion(donacion.id)
-        });
-      });
-      return result;
+      return rellenarDonaciones(donaciones);
     },
 
     donacion: async (_, { id }: GQL.IDonacionOnQueryArguments) => {
-      return await DonacionRepo.findById(id);
+      const donacion = await DonacionRepo.findById(id);
+      return rellenarDonacion(donacion);
     }
   },
   Mutation: {
     crearDonacion: async (_, args: GQL.ICrearDonacionOnMutationArguments) => {
-      return await DonacionRepo.create(args);
+      const donacion = await DonacionRepo.create(args);
+      return rellenarDonacion(donacion);
     }
   }
 };
