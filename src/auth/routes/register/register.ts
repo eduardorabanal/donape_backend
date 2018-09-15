@@ -11,7 +11,7 @@ import {
 import { Request, Response } from "express";
 import { formatYupError } from "../../../utils/formatYupError";
 import { Usuario } from "../../../entity/Usuario";
-import { createJwtToken } from "../../../utils/jwt";
+import { createJwtToken } from "../../../auth/jwt";
 
 const esquema = yup.object().shape({
   email: yup

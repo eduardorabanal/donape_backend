@@ -2,7 +2,7 @@ import * as bcrypt from "bcrypt";
 import { invalidLogin } from "./loginErrorMessages";
 import { Request, Response } from "express";
 import { Usuario } from "../../../entity/Usuario";
-import { createJwtToken } from "../../../utils/jwt";
+import { createJwtToken } from "../../../auth/jwt";
 
 export const login = async (req: Request, res: Response) => {
   const { email, password } = req.body;

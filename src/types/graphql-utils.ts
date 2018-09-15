@@ -5,6 +5,7 @@ export interface ResolverMap {
       args: any,
       context: {
         url: string;
+        user: any;
       },
       info: any
     ) => any;
