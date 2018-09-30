@@ -23,7 +23,9 @@ export namespace GQL {
   interface IQuery {
     __typename: "Query";
     donacionesByNecesidad: Array<IDonacion>;
+    donacionesByUsuario: Array<IDonacion>;
     donacion: IDonacion | null;
+    necesidad: INecesidad | null;
     publicaciones: Array<IPublicacion>;
     publicacion: IPublicacion | null;
   }
@@ -33,6 +35,10 @@ export namespace GQL {
   }
 
   interface IDonacionOnQueryArguments {
+    id: number;
+  }
+
+  interface INecesidadOnQueryArguments {
     id: number;
   }
 
@@ -46,6 +52,7 @@ export namespace GQL {
     necesidad: INecesidad | null;
     fecha: string;
     cantidad: number;
+    estados: Array<IDonacionEstado> | null;
   }
 
   interface INecesidad {
@@ -73,6 +80,15 @@ export namespace GQL {
     url: string;
   }
 
+  interface IDonacionEstado {
+    __typename: "DonacionEstado";
+    id: string | null;
+    donacion: IDonacion | null;
+    nombre: string | null;
+    fecha: string | null;
+    imagenes: Array<IImagen> | null;
+  }
+
   interface IMutation {
     __typename: "Mutation";
     crearDonacion: IDonacion | null;
@@ -80,8 +96,6 @@ export namespace GQL {
 
   interface ICrearDonacionOnMutationArguments {
     necesidad: number;
-    usuario: number;
-    fecha: string;
     cantidad: number;
   }
 }
