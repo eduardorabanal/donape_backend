@@ -4,6 +4,7 @@ import { DonacionRepo } from "./repo";
 import { EstadoDonacionRelacionRepo } from "./estados-repo";
 import { Donacion } from "../../entity/Donacion";
 import { checkAuth } from "../../auth/checkAuth";
+import * as moment from "moment";
 
 const rellenarDonacion = (donacion: Donacion | undefined) => {
   if (donacion) {
@@ -15,7 +16,7 @@ const rellenarDonacion = (donacion: Donacion | undefined) => {
   return donacion;
 };
 
-const rellenarDonaciones = (donaciones: Donacion[]) => {
+const rellenarDonaciones = (donaciones: any[]) => {
   const result: any[] = [];
   donaciones.forEach(donacion => {
     result.push(rellenarDonacion(donacion));
@@ -37,7 +38,13 @@ export const resolvers: ResolverMap = {
     donacionesByUsuario: async (_, {}, { user }) => {
       checkAuth(user);
       const donaciones = await DonacionRepo.findByUsuario(user.id);
-      return rellenarDonaciones(donaciones);
+      const donacionesMapped = donaciones.map(function(donacion) {
+        return {
+          ...donacion,
+          fecha: moment(donacion.fecha).format("DD/MM/YYYY")
+        };
+      });
+      return rellenarDonaciones(donacionesMapped);
     },
 
     donacion: async (_, { id }: GQL.IDonacionOnQueryArguments) => {
