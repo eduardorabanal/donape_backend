@@ -1,0 +1,4 @@
+#import Necesidad from "../../models.graphql"
+type Query {
+  necesidad(id: Int!): Necesidad
+}
