@@ -12,7 +12,8 @@ export class DonacionRepo {
   static findByUsuario(usuarioId: number) {
     return Donacion.find({
       where: { usuario: usuarioId },
-      relations
+      relations,
+      order: { fecha: 'DESC' }
     });
   }
   static findById(id: number) {
