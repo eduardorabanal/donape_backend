@@ -1,8 +1,8 @@
-import { EstadoDonacionRelacion } from "../../entity/EstadoDonacionRelacion";
+import { DonacionEstado } from "../../entity/DonacionEstado";
 
 export class EstadoDonacionRelacionRepo {
   static async findEstadosByDonacion(donacionId: number) {
-    const estadosDonaciones = await EstadoDonacionRelacion.find({
+    const estadosDonaciones = await DonacionEstado.find({
       where: { donacion: donacionId },
       relations: ["estado", "imagenes"]
     });

@@ -9,7 +9,7 @@ import {
 } from "typeorm";
 import { Necesidad } from "./Necesidad";
 import { Usuario } from "./Usuario";
-import { EstadoDonacionRelacion } from "./EstadoDonacionRelacion";
+import { DonacionEstado } from "./DonacionEstado";
 
 @Entity("Donaciones")
 export class Donacion extends BaseEntity {
@@ -22,8 +22,8 @@ export class Donacion extends BaseEntity {
   @Column()
   cantidad: number;
 
-  @OneToMany(() => EstadoDonacionRelacion, estado => estado.donacion)
-  estados: EstadoDonacionRelacion[];
+  @OneToMany(() => DonacionEstado, estado => estado.donacion)
+  estados: DonacionEstado[];
 
   //
   @ManyToOne(() => Necesidad, necesidad => necesidad.donaciones)

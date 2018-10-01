@@ -8,11 +8,11 @@ import {
   ManyToOne
 } from "typeorm";
 import { Donacion } from "./Donacion";
-import { EstadoDonacion } from "./EstadoDonacion";
+import { Estado } from "./Estado";
 import { Imagen } from "./Imagenes";
 
-@Entity("EstadosDonacionesRelacion")
-export class EstadoDonacionRelacion extends BaseEntity {
+@Entity("DonacionesEstados")
+export class DonacionEstado extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -20,13 +20,13 @@ export class EstadoDonacionRelacion extends BaseEntity {
   fecha: Date;
 
   @ManyToMany(() => Imagen)
-  @JoinTable({ name: "EstadosDonaciones_Imagenes" })
+  @JoinTable({ name: "DonacionesEstados_Imagenes" })
   imagenes: Imagen[];
 
   //
   @ManyToOne(() => Donacion, donacion => donacion.estados)
   donacion: Donacion;
 
-  @ManyToOne(() => EstadoDonacion, estado => estado.donaciones)
-  estado: EstadoDonacion;
+  @ManyToOne(() => Estado, estado => estado.donaciones)
+  estado: Estado;
 }
