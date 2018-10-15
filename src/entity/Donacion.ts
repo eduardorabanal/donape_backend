@@ -11,10 +11,16 @@ import { Necesidad } from "./Necesidad";
 import { Usuario } from "./Usuario";
 import { DonacionEstado } from "./DonacionEstado";
 
-@Entity("Donaciones")
+@Entity("donacion")
 export class Donacion extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
+
+  @Column({ name: "articulo_requerido" })
+  articuloRequerido: string;
+
+  @Column({ name: "articulo_donado" })
+  articuloDonado: string;
 
   @CreateDateColumn()
   fecha: Date;
@@ -25,7 +31,6 @@ export class Donacion extends BaseEntity {
   @OneToMany(() => DonacionEstado, estado => estado.donacion)
   estados: DonacionEstado[];
 
-  //
   @ManyToOne(() => Necesidad, necesidad => necesidad.donaciones)
   necesidad: Necesidad;
 

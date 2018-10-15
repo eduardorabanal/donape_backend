@@ -9,7 +9,7 @@ import {
 import { Publicacion } from "./Publicacion";
 import { Donacion } from "./Donacion";
 
-@Entity("Necesidades")
+@Entity("necesidad")
 export class Necesidad extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
@@ -17,8 +17,14 @@ export class Necesidad extends BaseEntity {
   @Column()
   articulo: string;
 
-  @Column()
-  cantidad: number;
+  @Column({ name: "cantidad_requerida" })
+  cantidadRequerida: number;
+
+  @Column({ name: "cantidad_recolectada" })
+  cantidadRecolectada: number;
+
+  @Column({ name: "cantidad_faltante" })
+  cantidadFaltante: number;
 
   @Column()
   fecha: Date;

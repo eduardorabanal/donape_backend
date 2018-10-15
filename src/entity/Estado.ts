@@ -1,7 +1,7 @@
 import { DonacionEstado } from "./DonacionEstado";
 import { Entity, Column, BaseEntity, PrimaryColumn, OneToMany } from "typeorm";
 
-@Entity("Estados")
+@Entity("estado")
 export class Estado extends BaseEntity {
   @PrimaryColumn("char", { length: 2 })
   id: string;

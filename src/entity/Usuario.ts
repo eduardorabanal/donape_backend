@@ -8,7 +8,7 @@ import {
 import { Publicacion } from "./Publicacion";
 import { Donacion } from "./Donacion";
 
-@Entity("Usuarios")
+@Entity("usuario")
 export class Usuario extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;

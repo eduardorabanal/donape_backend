@@ -4,15 +4,13 @@ import {
   Column,
   OneToMany,
   ManyToOne,
-  BaseEntity,
-  ManyToMany,
-  JoinTable
+  BaseEntity
 } from "typeorm";
 import { Necesidad } from "./Necesidad";
 import { Usuario } from "./Usuario";
-import { Imagen } from "./Imagenes";
+import { ImagenPublicacion } from "./ImagenPublicacion";
 
-@Entity("Publicaciones")
+@Entity("publicacion")
 export class Publicacion extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
@@ -35,7 +33,6 @@ export class Publicacion extends BaseEntity {
   @ManyToOne(() => Usuario, usuario => usuario.publicaciones)
   usuario: Usuario;
 
-  @ManyToMany(() => Imagen)
-  @JoinTable({ name: "Publicaciones_Imagenes" })
-  imagenes: Imagen[];
+  @OneToMany(() => ImagenPublicacion, imagen => imagen.publicacion)
+  imagenes: ImagenPublicacion[];
 }

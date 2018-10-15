@@ -1,29 +1,28 @@
 import {
   Entity,
-  Column,
   BaseEntity,
   PrimaryGeneratedColumn,
   ManyToMany,
   JoinTable,
-  ManyToOne
+  ManyToOne,
+  CreateDateColumn
 } from "typeorm";
 import { Donacion } from "./Donacion";
 import { Estado } from "./Estado";
-import { Imagen } from "./Imagenes";
+import { ImagenEstado } from "./ImagenEstado";
 
-@Entity("DonacionesEstados")
+@Entity("donacion_estado_xref")
 export class DonacionEstado extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @CreateDateColumn()
   fecha: Date;
 
-  @ManyToMany(() => Imagen)
-  @JoinTable({ name: "DonacionesEstados_Imagenes" })
-  imagenes: Imagen[];
+  @ManyToMany(() => ImagenEstado)
+  @JoinTable({ name: "donacion_estado_imagen_xref" })
+  imagenes: ImagenEstado[];
 
-  //
   @ManyToOne(() => Donacion, donacion => donacion.estados)
   donacion: Donacion;
 
