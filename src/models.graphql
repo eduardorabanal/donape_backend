@@ -10,7 +10,9 @@ type Publicacion {
 type Necesidad {
   id: Int!
   articulo: String!
-  cantidad: Float!
+  cantidad_requerida: Int
+  cantidad_recolectada: Int
+  cantidad_faltante: Int
   fecha: String!
   publicacion: Publicacion
 }

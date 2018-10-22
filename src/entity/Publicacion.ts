@@ -4,7 +4,8 @@ import {
   Column,
   OneToMany,
   ManyToOne,
-  BaseEntity
+  BaseEntity,
+  CreateDateColumn
 } from "typeorm";
 import { Necesidad } from "./Necesidad";
 import { Usuario } from "./Usuario";
@@ -24,7 +25,7 @@ export class Publicacion extends BaseEntity {
   @Column()
   descripcion: string;
 
-  @Column()
+  @CreateDateColumn()
   fecha: Date;
 
   @OneToMany(() => Necesidad, necesidad => necesidad.publicacion)

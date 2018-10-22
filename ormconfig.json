@@ -1,11 +1,15 @@
 [{
-        "name": "development",
-        "type": "mssql",
-        "host": "localhost",
-        "username": "donar",
-        "password": "d0n4r",
+        "name": "default",
+        "type": "mysql",
+        "host": "127.0.0.1",
+        "port": 3306,
+        "username": "root",
+        "password": "toor",
         "database": "donape-dev",
         "synchronize": true,
+        "options": {
+            "encrypt": false
+        },
         "logging": false,
         "entities": ["src/entity/**/*.ts"],
         "migrations": ["src/migration/**/*.ts"],

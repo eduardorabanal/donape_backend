@@ -25,7 +25,11 @@ export class Donacion extends BaseEntity {
   @CreateDateColumn()
   fecha: Date;
 
-  @Column()
+  @Column({
+    type: "decimal",
+    precision: 10,
+    scale: 2
+  })
   cantidad: number;
 
   @OneToMany(() => DonacionEstado, estado => estado.donacion)

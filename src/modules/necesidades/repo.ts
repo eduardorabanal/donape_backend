@@ -1,8 +1,8 @@
 import { Necesidad } from "../../entity/Necesidad";
 
 export class NecesidadRepo {
-  static findById(id: number) {
-    return Necesidad.findOne({
+  static async findById(id: number) {
+    return await Necesidad.findOne({
       where: { id },
       relations: ["publicacion"]
     });
