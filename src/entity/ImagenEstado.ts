@@ -1,4 +1,11 @@
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity } from "typeorm";
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  BaseEntity,
+  ManyToMany
+} from "typeorm";
+import { DonacionEstado } from "./DonacionEstado";
 
 @Entity("imagen_estado")
 export class ImagenEstado extends BaseEntity {
@@ -10,4 +17,7 @@ export class ImagenEstado extends BaseEntity {
 
   @Column()
   url: string;
+
+  @ManyToMany(() => DonacionEstado)
+  donacionEstados: DonacionEstado[];
 }

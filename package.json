@@ -39,7 +39,7 @@
         "graphql-yoga": "^1.9.2",
         "jsonwebtoken": "^8.3.0",
         "moment": "^2.22.2",
-        "mssql": "^4.1.0",
+        "mysql": "^2.16.0",
         "node-fetch": "^2.2.0",
         "reflect-metadata": "^0.1.12",
         "sparkpost": "^2.1.2",
@@ -48,9 +48,11 @@
         "yup": "^0.26.3"
     },
     "scripts": {
-        "start": "cross-env NODE_ENV=development nodemon --exec ts-node src/index.ts",
+        "start": "cross-env NODE_ENV=default nodemon --exec ts-node src/index.ts",
         "test": "cross-env NODE_ENV=test jest --forceExit",
-        "gen-schema-types": "ts-node src/scripts/createTypes.ts"
+        "gen-schema-types": "ts-node src/scripts/createTypes.ts",
+        "run-migrations": "ts-node ./node_modules/typeorm/cli.js migration:run",
+        "revert-migrations": "ts-node ./node_modules/typeorm/cli.js migration:revert"
     },
     "jest": {
         "globalSetup": "./src/testSetup/callSetup.js",

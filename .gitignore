@@ -6,3 +6,5 @@ tmp/
 temp/
 dump.rdb
 .env
+yarn.lock
+yarn-error.log

@@ -11,7 +11,7 @@ import { Donacion } from "./Donacion";
 import { Estado } from "./Estado";
 import { ImagenEstado } from "./ImagenEstado";
 
-@Entity("donacion_estado_xref")
+@Entity("donacion_estado")
 export class DonacionEstado extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
@@ -20,7 +20,7 @@ export class DonacionEstado extends BaseEntity {
   fecha: Date;
 
   @ManyToMany(() => ImagenEstado)
-  @JoinTable({ name: "donacion_estado_imagen_xref" })
+  @JoinTable({ name: "donacion_estado_imagen" })
   imagenes: ImagenEstado[];
 
   @ManyToOne(() => Donacion, donacion => donacion.estados)

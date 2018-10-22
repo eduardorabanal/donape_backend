@@ -4,7 +4,8 @@ import {
   Column,
   ManyToOne,
   BaseEntity,
-  OneToMany
+  OneToMany,
+  CreateDateColumn
 } from "typeorm";
 import { Publicacion } from "./Publicacion";
 import { Donacion } from "./Donacion";
@@ -17,16 +18,40 @@ export class Necesidad extends BaseEntity {
   @Column()
   articulo: string;
 
-  @Column({ name: "cantidad_requerida" })
+  @Column({ name: "es_ilimitada", default: false })
+  esIlimitada: boolean;
+
+  @Column({ name: "es_satisfecha", default: false })
+  esSatisfecha: boolean;
+
+  @Column({
+    type: "decimal",
+    precision: 10,
+    scale: 2,
+    name: "cantidad_requerida",
+    nullable: true
+  })
   cantidadRequerida: number;
 
-  @Column({ name: "cantidad_recolectada" })
+  @Column({
+    type: "decimal",
+    precision: 10,
+    scale: 2,
+    name: "cantidad_recolectada",
+    default: 0
+  })
   cantidadRecolectada: number;
 
-  @Column({ name: "cantidad_faltante" })
+  @Column({
+    type: "decimal",
+    precision: 10,
+    scale: 2,
+    name: "cantidad_faltante",
+    nullable: true
+  })
   cantidadFaltante: number;
 
-  @Column()
+  @CreateDateColumn()
   fecha: Date;
 
   @ManyToOne(() => Publicacion, publicacion => publicacion.necesidades)
