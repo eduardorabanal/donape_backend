@@ -30,9 +30,9 @@ export class DbSeed1539749633640 implements MigrationInterface {
 
   async crearYObtenerUsuario(): Promise<Usuario> {
     return await Usuario.create({
-      nombre: "Edu",
-      email: "edu@mail.com",
-      password: await bcrypt.hash("123", 10),
+      nombre: "Ramira",
+      email: "la@ra.com",
+      password: await bcrypt.hash("larami", 10),
       celular: "934465807"
     }).save();
   }
@@ -45,7 +45,8 @@ export class DbSeed1539749633640 implements MigrationInterface {
 
     const confirmada = await Estado.create({
       id: "CN",
-      nombre: "Confirmada"
+      nombre: "Confirmada",
+      actualizaNecesidad: true
     }).save();
 
     const entregada = await Estado.create({
