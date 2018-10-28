@@ -9,6 +9,9 @@ export class Estado extends BaseEntity {
   @Column()
   nombre: string;
 
+  @Column({name: "actualiza_necesidad", default: false})
+  actualizaNecesidad: boolean;
+
   @OneToMany(() => DonacionEstado, donaciones => donaciones.estado)
   donaciones: DonacionEstado[];
 }
