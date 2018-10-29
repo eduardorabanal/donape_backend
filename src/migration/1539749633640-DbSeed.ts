@@ -33,7 +33,8 @@ export class DbSeed1539749633640 implements MigrationInterface {
       nombre: "Ramira",
       email: "la@ra.com",
       password: await bcrypt.hash("larami", 10),
-      celular: "934465807"
+      celular: "934465807",
+      dni: "74125635"
     }).save();
   }
 

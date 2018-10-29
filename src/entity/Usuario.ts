@@ -16,13 +16,16 @@ export class Usuario extends BaseEntity {
   @Column("varchar", { length: 255, unique: true })
   email: string;
 
-  @Column("char", { length: 60 })
+  @Column("char", { length: 60, nullable: false })
   password: string;
 
-  @Column("varchar", { length: 255 })
+  @Column("varchar", { length: 255, nullable: false })
   nombre: string;
 
-  @Column("char", { length: 9 })
+  @Column("varchar", { length: 8, nullable: false })
+  dni: string;
+
+  @Column("char", { length: 9, nullable: false })
   celular: string;
 
   @OneToMany(() => Publicacion, publicacion => publicacion.usuarioId)
