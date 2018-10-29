@@ -6,7 +6,8 @@ import {
   passwordTooShort,
   nombreTooShort,
   celularInvalid,
-  emailDuplicated
+  emailDuplicated,
+  dniInvalid
 } from "./registerErrorMessages";
 import { Request, Response } from "express";
 import { formatYupError } from "../../../utils/formatYupError";
@@ -35,7 +36,13 @@ const esquema = yup.object().shape({
     .required()
     .min(9)
     .max(9)
-    .matches(new RegExp("^9[0-9]{8}$"), celularInvalid)
+    .matches(new RegExp("^9[0-9]{8}$"), celularInvalid),
+  dni: yup
+    .string()
+    .required()
+    .min(8, dniInvalid)
+    .max(8)
+    .matches(new RegExp("^[0-9]{8}$"), celularInvalid)
 });
 
 export const register = async (req: Request, res: Response) => {
@@ -50,7 +57,7 @@ export const register = async (req: Request, res: Response) => {
     });
   }
 
-  const { email, password, nombre, celular } = usuarioBody;
+  const { email, password, nombre, celular, dni } = usuarioBody;
 
   const usuarioYaExiste = await Usuario.findOne({
     where: { email },
@@ -74,7 +81,8 @@ export const register = async (req: Request, res: Response) => {
     email,
     password: hashedPassword,
     nombre,
-    celular
+    celular,
+    dni
   });
   await usuario.save();
 
